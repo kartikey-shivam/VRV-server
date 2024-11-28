@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  backend:
+    image: shivam301/vrv-be:latest # Docker Image of Backend App
+    container_name: backend
+    ports:
+      - '8000:8000'
+    env_file:
+      - .env

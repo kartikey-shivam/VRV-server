@@ -1,0 +1,37 @@
+{
+	"server": {
+		"home": "vrv Server is up and running.",
+		"notFound": "Route not found"
+	},
+	"transaction": {
+		"fetched": "Transaction fetched successfully",
+		"jobStarted": "Transaction Cron Job started successfully",
+		"jobEnded": "Transaction Cron Job ended successfully",
+		"invalidAction": "Invalid action",
+		"notFound": "Transaction not found",
+		"report": {
+			"sent": "Report generated successfully, please check your mail!",
+			"amount": "Transaction Amount report fetched successfully",
+			"numberOfTransactions": "Number of Transactions report fetched successfully",
+			"transactionType": "Transaction Type report fetched successfully"
+		},
+		"statusFetched": "Transaction Cron Job status fetched successfully",
+		"jobStopped": "Transaction Cron Job stopped successfully",
+		"store": "Transaction created successfully",
+		"alreadyExists": "Transaction already exists"
+	},
+	"auth": {
+		"userAlreadyRegistered": "User already registered, please login!",
+		"registrationComplete": "Registration successful",
+		"loggedIn": "Login successful",
+		"oAuthError": "Please log in with OAuth",
+		"accountNotFound": "Account does not exists, please register!",
+		"logout": "Logout successful!"
+	},
+	"user": {
+		"index": "User details fetched successfully"
+	},
+	"field": {
+		"destOriginIdSame": "Origin Id and Destination Id cannot be the same"
+	}
+}

@@ -1,0 +1,469 @@
+{
+	"info": {
+		"_postman_id": "5b8ce0f7-a586-46c3-b991-36f21ad6c59a",
+		"name": "vrv",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16772969",
+		"_collection_link": "https://galactic-space-183618.postman.co/workspace/ElectroHire~e8c8ceb5-b6e4-4247-816b-c11d8c34fa60/collection/16772969-5b8ce0f7-a586-46c3-b991-36f21ad6c59a?action=share&source=collection_link&creator=16772969"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Google Login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/api/auth/google/login",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"google",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"saraswat\",\r\n    \"lastName\": \"shivam\",\r\n    \"email\": \"saraswatshivam@gmail.com\",\r\n    \"password\": \"Test@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/auth/register",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"saraswat\",\r\n    \"lastName\": \"shivam\",\r\n    \"email\": \"saraswatshivam@gmail.com\",\r\n    \"password\": \"Test@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/auth/register",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"saraswat\",\r\n    \"lastName\": \"shivam\",\r\n    \"email\": \"saraswatshivam@gmail.com\",\r\n    \"password\": \"Test@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/user",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Reports",
+					"item": [
+						{
+							"name": "Amount Report",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/api/transaction/report/amounts",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"api",
+										"transaction",
+										"report",
+										"amounts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Number of Transactions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/api/transaction/report/number-of-transactions",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"api",
+										"transaction",
+										"report",
+										"number-of-transactions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Transaction Type",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/api/transaction/report/transaction-type",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"api",
+										"transaction",
+										"report",
+										"transaction-type"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/api/transaction?amountSent[gte]=100",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "WITHDRAWAL",
+									"disabled": true
+								},
+								{
+									"key": "transactionId",
+									"value": "5dbd97fbcabbb88f5e64aca9",
+									"disabled": true
+								},
+								{
+									"key": "originUserId",
+									"value": "5613fbeab6d12f92b2e1877b",
+									"disabled": true
+								},
+								{
+									"key": "destinationUserId",
+									"value": "5613fbeab6d12f92b2e1877b",
+									"disabled": true
+								},
+								{
+									"key": "transactionState",
+									"value": "SUSPENDED",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "potentially",
+									"disabled": true
+								},
+								{
+									"key": "timestampGte",
+									"value": "1732124520941",
+									"disabled": true
+								},
+								{
+									"key": "timestampLte",
+									"value": "1732124520941",
+									"disabled": true
+								},
+								{
+									"key": "amountGte",
+									"value": "963.59",
+									"disabled": true
+								},
+								{
+									"key": "currency",
+									"value": "MTL",
+									"disabled": true
+								},
+								{
+									"key": "tags",
+									"value": "override",
+									"disabled": true
+								},
+								{
+									"key": "amountSent[gte]",
+									"value": "100"
+								},
+								{
+									"key": "filters[amountSent][lte]",
+									"value": "500",
+									"disabled": true
+								},
+								{
+									"key": "filters[amountReceived][gte]",
+									"value": "50",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaction by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/api/transaction/:id",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"transaction",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "f6ca6d079dcfd9c3b18cbc9a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Toggle Cron Job",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"stops\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/transaction/cron/toggle",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"transaction",
+								"cron",
+								"toggle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cron Job Status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"stops\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/transaction/cron/status",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"transaction",
+								"cron",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download csv",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/api/transaction/:id",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"transaction",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "f6ca6d079dcfd9c3b18cbc9a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/api/transaction/report/get",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"transaction",
+								"report",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"TRANSFER\",\r\n    \"originUserId\": \"bbcacc0b7cf8aa1db5cded12\",\r\n    \"destinationUserId\": \"bbcacc0b7cf8aa1db5cded12\",\r\n    \"transactionState\": \"CREATED\",\r\n    \"originAmountDetails\": {\r\n        \"transactionAmount\": 0,\r\n        \"transactionCurrency\": \"INR\",\r\n        \"country\": \"IN\"\r\n    },\r\n    \"destinationAmountDetails\": {\r\n        \"transactionAmount\": 0,\r\n        \"transactionCurrency\": \"INR\",\r\n        \"country\": \"IN\"\r\n    },\r\n    \"description\": \"\",\r\n    \"tags\": [],\r\n    \"timestamp\": \"2024-10-02T18:20\",\r\n    \"transactionId\": \"bbcacc0b7cf8aa1db5cded12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/api/transaction/create",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"api",
+								"transaction",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+}

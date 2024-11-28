@@ -1,0 +1,83 @@
+{
+  "name": "vrv-server",
+  "version": "1.0.0",
+  "description": "backend for vrv",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' tsc && npm run copy-ejs",
+    "start": "node ./dist/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "format": "prettier --config .prettierrc --write src/**/*.ts",
+    "copy-ejs": "copyfiles -u 1 src/**/*.ejs dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://"
+  },
+  "keywords": [
+    "VRV"
+  ],
+  "author": "shivam301",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/"
+  },
+  "homepage": "https://github.com/",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/cors": "^2.8.17",
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^4.17.18",
+    "@types/i18n": "^0.13.10",
+    "@types/jest": "^29.5.14",
+    "@types/joi": "^17.2.3",
+    "@types/jsonwebtoken": "^9.0.3",
+    "@types/morgan": "^1.9.9",
+    "@types/multer": "^1.4.8",
+    "@types/node-cron": "^3.0.11",
+    "@types/nodemailer": "^6.4.17",
+    "@types/passport-google-oauth20": "^2.0.14",
+    "@types/supertest": "^6.0.2",
+    "@types/uuid": "^9.0.5",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "eslint": "^8.50.0",
+    "eslint-config-standard-with-typescript": "^39.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^3.0.1",
+    "prettier": "3.0.3",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.2.0",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "copyfiles": "^2.4.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.10",
+    "envalid": "^8.0.0",
+    "express": "^4.18.2",
+    "i18n": "^0.15.1",
+    "joi": "^17.10.2",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
+    "mongoose": "^7.5.3",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.16",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "supertest": "^7.0.0",
+    "uuid": "^9.0.1",
+    "xlsx": "^0.18.5"
+  }
+}
