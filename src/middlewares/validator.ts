@@ -20,6 +20,7 @@ const options: ValidationOptions = {
  */
 const validateRequest = (schema: Schema) => {
   return (req: Request, res: Response, next: NextFunction) => {
+    console.log("23")
     try {
       const { error } = schema.validate(req.body, options)
       const valid = error == null

@@ -33,3 +33,21 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
     }
   }
 }
+
+export const isAdmin = async (req: Request, res: Response, next: NextFunction)=>{
+  let token = req.cookies.token
+  if (!token) res.status(498).send({ message: 'Token missing' })
+  else{
+    try {
+      const decoded = jwt.verify(token, env.TOKEN_SECRET)
+      console.log(decoded,"43")
+      //@ts-ignore
+      const user = await User.findOne({ email: decoded?.email }).select('-password')
+      req['user'] = user as IUser
+      if(user?.role!='admin') throw new Error('Only Admin can access!')
+        next()
+    } catch (err) {
+      next(err)
+    }
+  }
+}

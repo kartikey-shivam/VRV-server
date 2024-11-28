@@ -29,9 +29,16 @@
 		"logout": "Logout successful!"
 	},
 	"user": {
-		"index": "User details fetched successfully"
+		"index": "User details fetched successfully",
+		"notexist": "user does not exist"
 	},
 	"field": {
 		"destOriginIdSame": "Origin Id and Destination Id cannot be the same"
-	}
+	},
+	"permission": {
+		"add": "Permission created successfully",
+		"alreadyExists": "Permission already exist",
+		"updateSuccess": "Permission of the user updated"
+	},
+	"One or more permissions are invalid": "One or more permissions are invalid"
 }

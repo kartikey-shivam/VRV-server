@@ -1,21 +1,38 @@
 import { Schema, model } from 'mongoose'
-import { IUser } from '../interfaces/user'
+import { IPermission,IUser } from '../interfaces/user'
 import bcrypt from 'bcrypt'
+// Permission schema
+const permissionSchema = new Schema({
+  name: { type: String, required: true }, // e.g., 'create transactions', 'download report'
+  description: { type: String, default: "" }, // Optional description for clarity
+});
 
+export enum RoleEnum {
+  Admin = "admin",
+  Moderator = "moderator",
+  User = "user",
+}
+
+//user schema
 const userSchema = new Schema<IUser>(
   {
-    firstName: String,
-    lastName: { type: String, default: '' },
+    firstName: { type: String, required: true },
+    lastName: { type: String, default: "" },
     email: { type: String, required: true, unique: true },
     password: { type: String },
     googleId: { type: String },
-    role:{type : String,default:'User'},
-    avatar: String,
+    avatar: { type: String },
     emailVerified: { type: Boolean, default: false },
+    role: {
+      type: String,
+      enum: Object.values(RoleEnum), // Only allow values from RoleEnum
+      default: RoleEnum.User,
+    },
+    permissions: [{ type: Schema.Types.ObjectId, ref: "Permission" }], // Direct user-specific permissions
   },
-
   { timestamps: true }
 )
+
 userSchema.pre<IUser>('save', async function (next) {
   try {
     if (!this.isModified('password')) {
@@ -30,4 +47,5 @@ userSchema.pre<IUser>('save', async function (next) {
   }
 })
 const User = model<IUser>('User', userSchema)
+export const Permission = model<IPermission>("Permission", permissionSchema);
 export default User

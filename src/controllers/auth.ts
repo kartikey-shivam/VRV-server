@@ -35,10 +35,10 @@ class AuthController {
 
   public static async register(req: Request, res: Response, next: NextFunction) {
     try {
-      let { firstName, lastName, email, password, role = 'customer' } = req.body
+      let { firstName, lastName, email, password, role = 'user' } = req.body
       const findUser = await User.findOne({ email })
       if (findUser) return res.error('auth.userAlreadyRegistered')
-      const user = await User.create({ firstName, lastName, email, password })
+      const user = await User.create({ firstName, lastName, email, password,role })
       console.log(user,"43")
 
       //@ts-ignore
