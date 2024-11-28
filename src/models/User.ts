@@ -3,7 +3,7 @@ import { IPermission,IUser } from '../interfaces/user'
 import bcrypt from 'bcrypt'
 // Permission schema
 const permissionSchema = new Schema({
-  name: { type: String, required: true }, // e.g., 'create transactions', 'download report'
+  name: { type: String, required: true,unique:true }, // e.g., 'create transactions', 'download report'
   description: { type: String, default: "" }, // Optional description for clarity
 });
 

@@ -38,7 +38,10 @@
 	"permission": {
 		"add": "Permission created successfully",
 		"alreadyExists": "Permission already exist",
-		"updateSuccess": "Permission of the user updated"
+		"updateSuccess": "Permission of the user updated",
+		"invalid": "One or more permissions are invalid"
 	},
-	"One or more permissions are invalid": "One or more permissions are invalid"
+	"role":{
+		"updated":"Role of the user updated successfully"
+	}
 }

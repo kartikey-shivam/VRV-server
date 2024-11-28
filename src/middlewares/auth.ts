@@ -40,7 +40,6 @@ export const isAdmin = async (req: Request, res: Response, next: NextFunction)=>
   else{
     try {
       const decoded = jwt.verify(token, env.TOKEN_SECRET)
-      console.log(decoded,"43")
       //@ts-ignore
       const user = await User.findOne({ email: decoded?.email }).select('-password')
       req['user'] = user as IUser
@@ -48,6 +47,27 @@ export const isAdmin = async (req: Request, res: Response, next: NextFunction)=>
         next()
     } catch (err) {
       next(err)
+    }
+  }
+
+}
+export const permissionValidator = async (permission:string,req:Request, res:Response, next: NextFunction)=>{
+  let token = req.cookies.token
+  if(!token)res.status(498).send({message:"Token missing"})
+  else{
+    try {
+      const decoded = jwt.verify(token, env.TOKEN_SECRET)
+      console.log(decoded,"43")
+      //@ts-ignore
+      const user = await User.findOne({ email: decoded?.email }).select('-password')
+      req['user'] = user as IUser
+      const permissions = user?.permissions
+      for(const perm in permissions){
+        if(perm === permission || perm==='All')next()
+      }
+        throw new Error('You do not have permission to access it')
+    } catch (error) {
+      
     }
   }
 }

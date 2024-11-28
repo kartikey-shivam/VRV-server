@@ -1,4 +1,6 @@
 import Joi from 'joi'
+import { permissionValidator } from '../middlewares/auth'
+import { NextFunction, Request, Response } from 'express'
 
 export const vRegister = Joi.object({
   firstName: Joi.string().min(3).max(25).required(),
@@ -14,3 +16,8 @@ export const vResetPassword = Joi.object({
 export const vDeleteAccount = Joi.object({
   password: Joi.string().required(),
 })
+
+export const permissionValidatorWrapper = (permission: string) => {
+  return (req: Request, res: Response, next: NextFunction) => 
+    permissionValidator(permission, req, res, next);
+};
