@@ -32,19 +32,18 @@ class AuthController {
       next(error)
     }
   }
-  public static async verifyEmail(req: Request, res: Response, next: NextFunction){
+  public static async verifyEmail(req: Request, res: Response, next: NextFunction) {
     try {
-      const {token}=req.query
-      if(!token) res.error('auth.invalidToken')
-        const decoded = jwt.verify(token as string, env.TOKEN_SECRET)
+      const { token } = req.query
+      if (!token) res.error('auth.invalidToken')
+      const decoded = jwt.verify(token as string, env.TOKEN_SECRET)
       //@ts-ignore
-      const user = await User.findOne({email: decoded?.email})
-      if(!user) return res.error('auth.accountNotFound')
-        if(user.emailVerified) return res.error('auth.emailVerified')
-          user.emailVerified=true
-        await user.save()
+      const user = await User.findOne({ email: decoded?.email })
+      if (!user) return res.error('auth.accountNotFound')
+      if (user.emailVerified) return res.error('auth.emailVerified')
+      user.emailVerified = true
+      await user.save()
       return res.success('auth.emailVerified')
-
     } catch (error) {
       next(error)
     }
@@ -62,7 +61,7 @@ class AuthController {
       }
       const token = jwt.sign(payload, env.TOKEN_SECRET, { expiresIn: '1h' })
       console.log('token', token)
-      await sendEMail(user.email, 'emailVerification', 'VRV Security: Verify your email address', {name: `${user.firstName} ${user.lastName}`, email: user.email, verificationUrl: `${env.APP_URL}/api/auth/verify-email?token=${token}` })
+      await sendEMail(user.email, 'emailVerification', 'VRV Security: Verify your email address', { name: `${user.firstName} ${user.lastName}`, email: user.email, verificationUrl: `${env.APP_URL}/api/auth/verify-email?token=${token}` })
       return res.success('auth.verificationEmailSent')
     } catch (error) {
       next(error)
@@ -73,8 +72,8 @@ class AuthController {
       let { firstName, lastName, email, password, role = 'user' } = req.body
       const findUser = await User.findOne({ email })
       if (findUser) return res.error('auth.userAlreadyRegistered')
-      const user = await User.create({ firstName, lastName, email, password,role })
-      console.log(user,"43")
+      const user = await User.create({ firstName, lastName, email, password, role })
+      console.log(user, '43')
 
       //@ts-ignore
       user.password = undefined
@@ -122,14 +121,12 @@ class AuthController {
     }
   }
   public static async logout(req: Request, res: Response, next: NextFunction) {
-    return res
-      .status(200)
-      .clearCookie('token', {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none',
-      })
-      .success('auth.logout')
+    return res.cookie('token', 'none', {
+      httpOnly: true,
+      maxAge: 0,
+      secure: true,
+      sameSite: 'none',
+    })
   }
 }
 export default AuthController
