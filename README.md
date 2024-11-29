@@ -2,7 +2,7 @@
 
 This is a backend server built with Node.js and Express.js for handling authentication, user management, and transaction operations. It also supports Google OAuth authentication, cron job management, and reporting features.
 
-Frontend deployed Link: [https://vrv-client-git-main-kartikeyshivams-projects.vercel.app](https://vrv-client-git-main-kartikeyshivams-projects.vercel.app/)
+Frontend deployed Link: [https://vrv-client-chi.vercel.app/](https://vrv-client-chi.vercel.app/)
 
 Backend deployed Link: [https://vrv-server-production.up.railway.app](https://vrv-server-production.up.railway.app/)
 

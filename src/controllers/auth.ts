@@ -23,10 +23,7 @@ class AuthController {
       const token = jwt.sign(payload, env.TOKEN_SECRET, { expiresIn: '30d' })
       res.cookie('token', token, {
         httpOnly: true,
-        secure: true,
-        sameSite: 'none',
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-        ...(env.NODE_ENV != 'local' && { domain: '' }),
+        expires: new Date(Date.now()+252869000000)
       })
       return res.success('auth.loggedIn', { user })
     } catch (error) {
@@ -115,7 +112,7 @@ class AuthController {
           secure: true,
           sameSite: 'none',
           maxAge: 30 * 24 * 60 * 60 * 1000,
-          ...(env.NODE_ENV != 'local' && { domain: '' }),
+          ...(env.NODE_ENV != 'local' && { domain: '.vercel.app' }),
         })
         res.redirect(`${fallbackUrl}`)
       })
@@ -124,15 +121,12 @@ class AuthController {
     }
   }
   public static async logout(req: Request, res: Response, next: NextFunction) {
-    return res
-      .status(200)
-      .clearCookie('token', {
+    res.cookie('token','No token', {
         httpOnly: true,
-        secure: true,
-        sameSite: 'none',
-        ...(env.NODE_ENV != 'local' && { domain: '' }), // Correct dynamic spread syntax
+        expires: new Date(Date.now()+252869000000)
       })
-      .success('auth.logout')
+      
+    return res.success('auth.logout')
   }
 }
 export default AuthController

@@ -26,7 +26,7 @@
 		"loggedIn": "Login successful",
 		"oAuthError": "Please log in with OAuth",
 		"accountNotFound": "Account does not exists, please register!",
-		"logout": "Logout successful!",
+		"logout": "Not able to logout please clear cookies manually!",
 		"verificationEmailSent": "Verfication email send successfully",
 		"emailVerified": "Email verfied Successfully"
 		
