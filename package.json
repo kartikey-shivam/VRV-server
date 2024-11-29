@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://"
+    "url": "git+https://github.com/kartikey-shivam/VRV-server"
   },
   "keywords": [
     "VRV"
@@ -23,9 +23,9 @@
   "author": "shivam301",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/"
+    "url": "https://github.com/https://github.com/kartikey-shivam/VRV-server"
   },
-  "homepage": "https://github.com/",
+  "homepage": "https://github.com/https://github.com/kartikey-shivam/VRV-server",
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.7",

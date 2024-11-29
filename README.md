@@ -2,13 +2,13 @@
 
 This is a backend server built with Node.js and Express.js for handling authentication, user management, and transaction operations. It also supports Google OAuth authentication, cron job management, and reporting features.
 
-Frontend deployed Link: [](/)
+Frontend deployed Link: [https://vrv-client-git-main-kartikeyshivams-projects.vercel.app](https://vrv-client-git-main-kartikeyshivams-projects.vercel.app/)
 
-Backend deployed Link: []()
+Backend deployed Link: [https://vrv-server-production.up.railway.app](https://vrv-server-production.up.railway.app/)
 
 Postman Collection Link: []()
 
-Frontend Repository Link: []()
+Frontend Repository Link: [https://github.com/kartikey-shivam/VRV-client](https://github.com/kartikey-shivam/VRV-client/)
 
 ---
 
@@ -26,6 +26,9 @@ Frontend Repository Link: []()
 ## Features
 - **Authentication**: Register, Login, Logout with JWT-based cookie sessions.
 - **Google OAuth**: Integrates with Google for third-party authentication.
+- **Email Verification**: Integrates with ejs-template. email-nodemailer .
+- **User role**: Integrates with Api calling also added permission based access.
+
 - **Transaction Management**: CRUD operations for transactions.
 - **Cron Jobs**: Enable/disable and check status of scheduled tasks.
 - **Reporting**: Generate and download various reports (e.g., CSV, transaction types).
