@@ -4,6 +4,7 @@ import passport from 'passport'
 import env from '../configs/env'
 import User from '../models/User'
 import bcrypt from 'bcrypt'
+import { sendEMail } from '../services/Email'
 class AuthController {
   public static async login(req: Request, res: Response, next: NextFunction) {
     try {
@@ -32,14 +33,49 @@ class AuthController {
       next(error)
     }
   }
+  public static async verifyEmail(req: Request, res: Response, next: NextFunction){
+    try {
+      const {token}=req.query
+      if(!token) res.error('auth.invalidToken')
+        const decoded = jwt.verify(token as string, env.TOKEN_SECRET)
+      //@ts-ignore
+      const user = await User.findOne({email: decoded?.email})
+      if(!user) return res.error('auth.accountNotFound')
+        if(user.emailVerified) return res.error('auth.emailVerified')
+          user.emailVerified=true
+        await user.save()
+      return res.success('auth.emailVerified')
 
+    } catch (error) {
+      next(error)
+    }
+  }
+  public static async sendEmailVerification(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { email } = req.body
+      const user = await User.findOne({ email })
+      if (!user) return res.error('auth.accountNotFound')
+      if (user?.emailVerified) return res.error('auth.emailAlreadyVerified')
+      console.log('user', user)
+      const payload = {
+        _id: user._id,
+        email: user.email,
+      }
+      const token = jwt.sign(payload, env.TOKEN_SECRET, { expiresIn: '1h' })
+      console.log('token', token)
+      await sendEMail(user.email, 'emailVerification', 'VRV Security: Verify your email address', {name: `${user.firstName} ${user.lastName}`, email: user.email, verificationUrl: `${env.APP_URL}/api/auth/verify-email?token=${token}` })
+      return res.success('auth.verificationEmailSent')
+    } catch (error) {
+      next(error)
+    }
+  }
   public static async register(req: Request, res: Response, next: NextFunction) {
     try {
       let { firstName, lastName, email, password, role = 'user' } = req.body
       const findUser = await User.findOne({ email })
       if (findUser) return res.error('auth.userAlreadyRegistered')
-      const user = await User.create({ firstName, lastName, email, password,role })
-      console.log(user,"43")
+      const user = await User.create({ firstName, lastName, email, password, role })
+      console.log(user, '43')
 
       //@ts-ignore
       user.password = undefined

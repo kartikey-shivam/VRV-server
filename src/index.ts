@@ -21,7 +21,7 @@ class Server {
   constructor() {
     this.app = express()
     this.port = env.PORT
-    this.origin = ['http://localhost:3000', env.FRONTEND_URL]
+    this.origin = ['http://localhost:3000', 'http://127.0.0.1:3000',env.FRONTEND_URL]
     this.app.use(express.json())
     this.initializeDatabase()
     this.initializeMiddleware()

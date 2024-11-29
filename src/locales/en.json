@@ -26,12 +26,15 @@
 		"loggedIn": "Login successful",
 		"oAuthError": "Please log in with OAuth",
 		"accountNotFound": "Account does not exists, please register!",
-		"logout": "Logout successful!"
+		"logout": "Logout successful!",
+		"verificationEmailSent": "Verfication email send successfully",
+		"emailVerified": "Email verfied Successfully"
+		
 	},
 	"user": {
 		"index": "User details fetched successfully",
 		"notexist": "user does not exist",
-		"fetchAll":"All user fetched successfully"
+		"fetchAll": "All user fetched successfully"
 	},
 	"field": {
 		"destOriginIdSame": "Origin Id and Destination Id cannot be the same"
@@ -42,7 +45,7 @@
 		"updateSuccess": "Permission of the user updated",
 		"invalid": "One or more permissions are invalid"
 	},
-	"role":{
-		"updated":"Role of the user updated successfully"
+	"role": {
+		"updated": "Role of the user updated successfully"
 	}
 }

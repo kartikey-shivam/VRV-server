@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Verification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .email-container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #ffffff;
+      border: 1px solid #dddddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .email-header {
+      background-color: #4caf50;
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+    }
+    .email-header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .email-body {
+      padding: 20px;
+      color: #333333;
+    }
+    .email-body p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 0 0 10px;
+    }
+    .email-button {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .email-button a {
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .email-footer {
+      text-align: center;
+      font-size: 12px;
+      color: #777777;
+      padding: 10px 20px;
+      border-top: 1px solid #dddddd;
+      background: #f9f9f9;
+    }
+    .email-footer p {
+      margin: 5px 0;
+    }
+    .email-footer a {
+      color: #4caf50;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="email-header">
+      <h1>Email Verification</h1>
+    </div>
+    <div class="email-body">
+      <p>Hi <%= name %>,</p>
+      <p>Thank you for signing up! Please verify your email address by clicking the button below:</p>
+      <div class="email-button">
+        <a href="<%= verificationUrl %>" target="_blank">Verify Email</a>
+      </div>
+      <p>If you didn’t request this, please ignore this email.</p>
+    </div>
+    <div class="email-footer">
+      <p>&copy; <%= new Date().getFullYear() %> Your Company Name. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>
