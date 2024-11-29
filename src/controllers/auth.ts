@@ -23,7 +23,10 @@ class AuthController {
       const token = jwt.sign(payload, env.TOKEN_SECRET, { expiresIn: '30d' })
       res.cookie('token', token, {
         httpOnly: true,
-        expires: new Date(Date.now()+252869000000)
+        secure: true,
+        sameSite: 'none',
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        ...(env.NODE_ENV != 'local' && { domain: '' }),
       })
       return res.success('auth.loggedIn', { user })
     } catch (error) {
@@ -71,8 +74,8 @@ class AuthController {
       let { firstName, lastName, email, password, role = 'user' } = req.body
       const findUser = await User.findOne({ email })
       if (findUser) return res.error('auth.userAlreadyRegistered')
-      const user = await User.create({ firstName, lastName, email, password, role })
-      console.log(user, '43')
+      const user = await User.create({ firstName, lastName, email, password,role })
+      console.log(user,"43")
 
       //@ts-ignore
       user.password = undefined
@@ -112,7 +115,7 @@ class AuthController {
           secure: true,
           sameSite: 'none',
           maxAge: 30 * 24 * 60 * 60 * 1000,
-          ...(env.NODE_ENV != 'local' && { domain: '.vercel.app' }),
+          ...(env.NODE_ENV != 'local' && { domain: '' }),
         })
         res.redirect(`${fallbackUrl}`)
       })
@@ -121,12 +124,15 @@ class AuthController {
     }
   }
   public static async logout(req: Request, res: Response, next: NextFunction) {
-    res.cookie('token','No token', {
+    return res
+      .status(200)
+      .clearCookie('token', {
         httpOnly: true,
-        expires: new Date(Date.now()+252869000000)
+        secure: true,
+        sameSite: 'none',
+        ...(env.NODE_ENV != 'local' && { domain: '' }), // Correct dynamic spread syntax
       })
-      
-    return res.success('auth.logout')
+      .success('auth.logout')
   }
 }
 export default AuthController
