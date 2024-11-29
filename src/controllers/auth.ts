@@ -21,13 +21,8 @@ class AuthController {
         email: user.email,
       }
       const token = jwt.sign(payload, env.TOKEN_SECRET, { expiresIn: '30d' })
-      res.cookie('token', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none',
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-      })
-      return res.success('auth.loggedIn', { user })
+     console.log(token)
+      return res.success('auth.loggedIn', {token, user })
     } catch (error) {
       next(error)
     }
@@ -108,12 +103,7 @@ class AuthController {
           email: req.user.email,
         }
         const token = jwt.sign(payload, env.TOKEN_SECRET, { expiresIn: '30d' })
-        res.cookie('token', token, {
-          httpOnly: true,
-          secure: true,
-          sameSite: 'none',
-          maxAge: 30 * 24 * 60 * 60 * 1000,
-        })
+        res.success('auth.loggedIn', {token })
         res.redirect(`${fallbackUrl}`)
       })
     } catch (error) {

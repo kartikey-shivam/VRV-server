@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import jwt from 'jsonwebtoken'
+import jwt, { decode } from 'jsonwebtoken'
 import env from '../configs/env'
 import User from '../models/User'
 import { IUser } from '../interfaces/user'
@@ -17,12 +17,17 @@ import { IUser } from '../interfaces/user'
  * @param res - The response object.
  * @param next - The next middleware function.
  */
+
 export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
-  let token = req.cookies.token
-  if (!token) res.status(498).send({ message: 'Token missing' })
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).send({ message: "Unauthorized: No token provided" });
+  }
   else {
+    const token = authHeader.split(" ")[1];
     try {
       const decoded = jwt.verify(token, env.TOKEN_SECRET)
+      req.body.user = decoded;
       //@ts-ignore
       const user = await User.findOne({ email: decoded.email }).select('-password')
       if (!user) throw new Error('Invalid token')
@@ -35,11 +40,9 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
 }
 
 export const isAdmin = async (req: Request, res: Response, next: NextFunction)=>{
-  let token = req.cookies.token
-  if (!token) res.status(498).send({ message: 'Token missing' })
-  else{
+
     try {
-      const decoded = jwt.verify(token, env.TOKEN_SECRET)
+      const decoded = req.body.user
       //@ts-ignore
       const user = await User.findOne({ email: decoded?.email }).select('-password')
       req['user'] = user as IUser
@@ -48,15 +51,14 @@ export const isAdmin = async (req: Request, res: Response, next: NextFunction)=>
     } catch (err) {
       next(err)
     }
-  }
+  
 
 }
 export const permissionValidator = async (permission:string,req:Request, res:Response, next: NextFunction)=>{
-  let token = req.cookies.token
-  if(!token)res.status(498).send({message:"Token missing"})
-  else{
+ 
+  
     try {
-      const decoded = jwt.verify(token, env.TOKEN_SECRET)
+      const decoded = req.body.user
       //@ts-ignore
       const user = await User.findOne({ email: decoded?.email }).select('-password')
       req['user'] = user as IUser
@@ -71,5 +73,5 @@ export const permissionValidator = async (permission:string,req:Request, res:Res
     } catch (error) {
       
     }
-  }
+  
 }

@@ -13,13 +13,10 @@ class UserController {
     }
   }
   public static async getAll(req: Request, res: Response, next: NextFunction){
-    let token = req.cookies.token
-    if(!token)res.status(498).send({message:"Token missing"})
-    else{
+    let {user} = req.body
         try {
-          const decoded = jwt.verify(token, env.TOKEN_SECRET)
           //@ts-ignore
-          const users = await User.find({ email: { $ne: decoded?.email } });
+          const users = await User.find({ email: { $ne: user?.email } });
 
         if (!users || users.length === 0) {
           return res.status(404).send({ message: 'No users found' });
@@ -30,7 +27,6 @@ class UserController {
       } catch (error) {
         next(error)
       }
-    }
   }
   public static async addPermission(req:Request, res:Response,next:NextFunction){
     try {

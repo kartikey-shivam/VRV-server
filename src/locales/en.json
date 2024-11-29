@@ -28,8 +28,8 @@
 		"accountNotFound": "Account does not exists, please register!",
 		"logout": "Not able to logout please clear cookies manually!",
 		"verificationEmailSent": "Verfication email send successfully",
-		"emailVerified": "Email verfied Successfully"
-		
+		"emailVerified": "Email verfied Successfully",
+		"emailAlreadyVerified": "auth.emailAlreadyVerified"
 	},
 	"user": {
 		"index": "User details fetched successfully",
