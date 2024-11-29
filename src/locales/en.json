@@ -30,7 +30,8 @@
 	},
 	"user": {
 		"index": "User details fetched successfully",
-		"notexist": "user does not exist"
+		"notexist": "user does not exist",
+		"fetchAll":"All user fetched successfully"
 	},
 	"field": {
 		"destOriginIdSame": "Origin Id and Destination Id cannot be the same"

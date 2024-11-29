@@ -7,7 +7,7 @@ export interface IUser extends Document {
   email: string
   password: string
   role:RoleEnum
-  permissions:IPermission
+  permissions:string[]
   emailVerified: boolean
   googleId?: string
   avatar?: string

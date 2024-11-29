@@ -28,7 +28,7 @@ const userSchema = new Schema<IUser>(
       enum: Object.values(RoleEnum), // Only allow values from RoleEnum
       default: RoleEnum.User,
     },
-    permissions: [{ type: Schema.Types.ObjectId, ref: "Permission" }], // Direct user-specific permissions
+    permissions: [{ type: String }], // Direct user-specific permissions
   },
   { timestamps: true }
 )

@@ -57,13 +57,15 @@ export const permissionValidator = async (permission:string,req:Request, res:Res
   else{
     try {
       const decoded = jwt.verify(token, env.TOKEN_SECRET)
-      console.log(decoded,"43")
       //@ts-ignore
       const user = await User.findOne({ email: decoded?.email }).select('-password')
       req['user'] = user as IUser
       const permissions = user?.permissions
-      for(const perm in permissions){
-        if(perm === permission || perm==='All')next()
+      if(!permissions) throw new Error('No permissions assigned to this user')
+      for(const perm of permissions){
+        if(perm == permission || perm=='All'){
+          next()
+        }
       }
         throw new Error('You do not have permission to access it')
     } catch (error) {

@@ -12,9 +12,28 @@ class UserController {
       next(error)
     }
   }
+  public static async getAll(req: Request, res: Response, next: NextFunction){
+    let token = req.cookies.token
+    if(!token)res.status(498).send({message:"Token missing"})
+    else{
+        try {
+          const decoded = jwt.verify(token, env.TOKEN_SECRET)
+          //@ts-ignore
+          const users = await User.find({ email: { $ne: decoded?.email } });
+
+        if (!users || users.length === 0) {
+          return res.status(404).send({ message: 'No users found' });
+        }
+        const userEmails = users.map((user) => user.email);
+
+        return res.success('user.fetchAll',{userEmails})
+      } catch (error) {
+        next(error)
+      }
+    }
+  }
   public static async addPermission(req:Request, res:Response,next:NextFunction){
     try {
-      
       const {name} = req.body;
       if (await Permission.findOne({ name })) return res.error('permission.alreadyExists')
         const permission = await Permission.create(req.body)
@@ -24,15 +43,12 @@ class UserController {
     }
   }
   public static async updateUserPermission(req:Request, res:Response,next:NextFunction){
-    let token = req.cookies.token
-    if(!token)res.status(498).send({message:"Token missing"})
+ 
     try {
       
-      const {permission} = req.body;
-      const decoded = jwt.verify(token, env.TOKEN_SECRET)
-      console.log(decoded,"43")
+      const {email,permission} = req.body;
       //@ts-ignore
-      const user = await User.findOne({ email: decoded?.email }).select('-password')
+      const user = await User.findOne({ email }).select('-password')
       if(!user) return res.error('user.notexist')
       req['user'] = user as IUser
         const validPermissions = await Permission.find({
@@ -46,11 +62,11 @@ class UserController {
             {invalidPermissions}
           );
         }
-        const permissionIds = validPermissions.map((perm) => perm._id);
+        const permissionNames = validPermissions.map((perm) => perm.name);
 
           const updatedUser = await User.findByIdAndUpdate(
             user._id,
-            { permissions: permissionIds }, 
+            { permissions: permissionNames }, 
             { new: true } 
           ).populate("permissions");
         res.success('permission.updateSuccess',{updatedUser})
@@ -59,20 +75,17 @@ class UserController {
     }
   }
   public static async userUpdate(req:Request, res:Response,next:NextFunction){
-    let token = req.cookies.token
-    if(!token)res.status(498).send({message:"Token missing"})
+
       try {
-        const roleUpdated = req.body
-        const decoded = jwt.verify(token, env.TOKEN_SECRET)
-        console.log(decoded,"43")
+        const {email,role} = req.body
         //@ts-ignore
-        const user = await User.findOne({ email: decoded?.email }).select('-password')
+        const user = await User.findOne({ email }).select('-password')
         if(!user) return res.error('user.notexist')
 
         req['user'] = user as IUser
         const updatedUser = await User.findByIdAndUpdate(
           user._id,
-          { role: roleUpdated }, 
+          { role: role }, 
           { new: true } 
         ).populate("role");
       res.success('role.updated',{updatedUser})
