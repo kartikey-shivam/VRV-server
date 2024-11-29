@@ -26,7 +26,6 @@ class AuthController {
         secure: true,
         sameSite: 'none',
         maxAge: 30 * 24 * 60 * 60 * 1000,
-        ...(env.NODE_ENV != 'local' && { domain: '.vercel.app' }),
       })
       return res.success('auth.loggedIn', { user })
     } catch (error) {
@@ -115,7 +114,6 @@ class AuthController {
           secure: true,
           sameSite: 'none',
           maxAge: 30 * 24 * 60 * 60 * 1000,
-          ...(env.NODE_ENV != 'local' && { domain: '.vercel.app' }),
         })
         res.redirect(`${fallbackUrl}`)
       })
@@ -130,7 +128,6 @@ class AuthController {
         httpOnly: true,
         secure: true,
         sameSite: 'none',
-        ...(env.NODE_ENV != 'local' && { domain: '.vercel.app' }), // Correct dynamic spread syntax
       })
       .success('auth.logout')
   }
